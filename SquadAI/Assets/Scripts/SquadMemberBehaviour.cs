@@ -8,52 +8,60 @@ public class SquadMemberBehaviour : MonoBehaviour
     [Header("Squad Member Movement Setup")]
     public Camera mainCam;
     public NavMeshAgent navMeshAgent;
-    //public bool squadLeader;
-    //public Transform SL;
-    //public Vector3 offset;
-    //public float smoothSpeed;
+    public Transform destinationTarget;
 
     [Header("Squad Member Combat Setup")]
     public float combatRadius;
     public Transform targetedEnemy;
 
+    SquadManager squadManager;
+
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        squadManager = GameObject.FindGameObjectWithTag("Squad Manager").GetComponent<SquadManager>();
+
         navMeshAgent = this.GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        GetNewLocation();
         SetTarget();
+        MoveToDestination();
 
         if (targetedEnemy)
         {
             FaceTarget();
             AttackEnemy();
         }
-    }    
-
-    // Functionality for getting a new location to move to.
-    void GetNewLocation()
-    {
-        if (Input.GetMouseButtonDown(0)) // On left click
-        {
-            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition); // Ray from the camera to the mouse position
-            RaycastHit hit; // Hit data for our ray
-
-            if (Physics.Raycast(ray, out hit)) // Checks if that ray has hit something
-            {
-                MoveToLocation(hit);            }
-        }
     }
 
-    // Functionality for moving to the new location based on hit location
-    void MoveToLocation(RaycastHit hit)
+    // Functionality for moving to target destination
+    void MoveToDestination()
     {
-        navMeshAgent.SetDestination(hit.point); // Set's new agent destination
+        navMeshAgent.SetDestination(destinationTarget.transform.position); // Set's new agent destination
     }
+
+    //// Functionality for getting a new location to move to.
+    //void GetNewLocation()
+    //{
+    //    if (Input.GetMouseButtonDown(0)) // On left click
+    //    {
+    //        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition); // Ray from the camera to the mouse position
+    //        RaycastHit hit; // Hit data for our ray
+
+    //        if (Physics.Raycast(ray, out hit)) // Checks if that ray has hit something
+    //        {
+    //            MoveToLocation(hit);
+    //        }
+    //    }
+    //}
+
+    //// Functionality for moving to the new location based on hit location
+    //void MoveToLocation(RaycastHit hit)
+    //{
+    //    navMeshAgent.SetDestination(hit.point); // Set's new agent destination
+    //}
 
     // Functionality to detect enemies in a certain radius
     void SetTarget()
