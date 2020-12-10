@@ -11,16 +11,18 @@ public class SquadMemberBehaviour : MonoBehaviour
     public Transform destinationTarget;
 
     [Header("Squad Member Combat Setup")]
-    public float combatRadius;
+    public SquadMemberType memberType;
     public Transform targetedEnemy;
 
     SquadManager squadManager;
+    SquadCombat squadCombat;
 
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         squadManager = GameObject.FindGameObjectWithTag("Squad Manager").GetComponent<SquadManager>();
 
+        squadCombat = this.GetComponent<SquadCombat>();
         navMeshAgent = this.GetComponent<NavMeshAgent>();
     }
 
@@ -42,31 +44,10 @@ public class SquadMemberBehaviour : MonoBehaviour
         navMeshAgent.SetDestination(destinationTarget.transform.position); // Set's new agent destination
     }
 
-    //// Functionality for getting a new location to move to.
-    //void GetNewLocation()
-    //{
-    //    if (Input.GetMouseButtonDown(0)) // On left click
-    //    {
-    //        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition); // Ray from the camera to the mouse position
-    //        RaycastHit hit; // Hit data for our ray
-
-    //        if (Physics.Raycast(ray, out hit)) // Checks if that ray has hit something
-    //        {
-    //            MoveToLocation(hit);
-    //        }
-    //    }
-    //}
-
-    //// Functionality for moving to the new location based on hit location
-    //void MoveToLocation(RaycastHit hit)
-    //{
-    //    navMeshAgent.SetDestination(hit.point); // Set's new agent destination
-    //}
-
     // Functionality to detect enemies in a certain radius
     void SetTarget()
     { 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, combatRadius); // Get all colliders in a certain radius
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, memberType.attackRange); // Get all colliders in a certain radius
 
         foreach (var hitCollider in hitColliders)
         {
@@ -89,7 +70,7 @@ public class SquadMemberBehaviour : MonoBehaviour
 
         if (targetedEnemy)
         {
-            if (Vector3.Distance(transform.position, targetedEnemy.position) > combatRadius)
+            if (Vector3.Distance(transform.position, targetedEnemy.position) > memberType.attackRange)
             {
                 targetedEnemy = null; // Sets target to null if agent goes out of range
             }
@@ -112,11 +93,19 @@ public class SquadMemberBehaviour : MonoBehaviour
     // Functionality for attacking targeted enemy
     void AttackEnemy()
     {
-       // Attacking functionality
+        if(targetedEnemy)
+        {
+            squadCombat.attackState = SquadCombat.AttackState.Attacking;
+        }
+
+        if(!targetedEnemy)
+        {
+            squadCombat.attackState = SquadCombat.AttackState.Idle;
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, combatRadius);
+        Gizmos.DrawWireSphere(transform.position, memberType.attackRange);
     }
 }

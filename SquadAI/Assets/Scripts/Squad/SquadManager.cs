@@ -55,6 +55,6 @@ public class SquadManager : MonoBehaviour
     // Functionality for moving to the new location based on hit location
     void MoveToLocation(RaycastHit hit)
     {
-        navMeshAgent.SetDestination(hit.point); // Set's new agent destination
+        navMeshAgent.SetDestination(hit.point); // Sets new agent destination
     }
 }

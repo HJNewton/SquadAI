@@ -8,6 +8,7 @@ TagManager:
   - Squad Member
   - Squad Manager
   - Destination Point
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - 
   - Squad Member
-  - 
+  - Squad Manager
   - 
   - 
   - 
