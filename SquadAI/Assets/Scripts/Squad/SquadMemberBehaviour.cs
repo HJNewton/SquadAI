@@ -15,14 +15,14 @@ public class SquadMemberBehaviour : MonoBehaviour
     public Transform targetedEnemy;
 
     SquadManager squadManager;
-    SquadCombat squadCombat;
+    SquadMemberCombat squadCombat;
 
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         squadManager = GameObject.FindGameObjectWithTag("Squad Manager").GetComponent<SquadManager>();
 
-        squadCombat = this.GetComponent<SquadCombat>();
+        squadCombat = this.GetComponent<SquadMemberCombat>();
         navMeshAgent = this.GetComponent<NavMeshAgent>();
     }
 
@@ -31,10 +31,11 @@ public class SquadMemberBehaviour : MonoBehaviour
         SetTarget();
         MoveToDestination();
 
+        SetAttackState();
+
         if (targetedEnemy)
         {
             FaceTarget();
-            AttackEnemy();
         }
     }
 
@@ -90,17 +91,17 @@ public class SquadMemberBehaviour : MonoBehaviour
         Debug.DrawRay(transform.position, newDirection * 100);
     }
 
-    // Functionality for attacking targeted enemy
-    void AttackEnemy()
+    // Functionality for setting the attack state
+    void SetAttackState()
     {
         if(targetedEnemy)
         {
-            squadCombat.attackState = SquadCombat.AttackState.Attacking;
+            squadCombat.attackState = SquadMemberCombat.AttackState.Attacking;
         }
 
-        if(!targetedEnemy)
+        if(targetedEnemy == null)
         {
-            squadCombat.attackState = SquadCombat.AttackState.Idle;
+            squadCombat.attackState = SquadMemberCombat.AttackState.Idle;
         }
     }
 

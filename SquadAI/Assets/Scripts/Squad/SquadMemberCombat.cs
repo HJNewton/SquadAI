@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquadCombat : MonoBehaviour
+public class SquadMemberCombat : MonoBehaviour
 {
     public enum AttackState
     {
@@ -17,6 +17,8 @@ public class SquadCombat : MonoBehaviour
     [Header("Combat Setup")]
     public SquadMemberType memberType; // The squad member type scriptable object
 
+    float timeBetweenShots;
+
     private void Start()
     {
         attackState = AttackState.Idle;
@@ -25,14 +27,17 @@ public class SquadCombat : MonoBehaviour
     private void Update()
     {
         Attack();
+
+        timeBetweenShots -= Time.deltaTime; // Reduce time until next available shot
     }
 
     public void Attack()
     {
         // Is attacking
-        if(attackState == AttackState.Attacking)
+        if(attackState == AttackState.Attacking && timeBetweenShots <= 0)
         {
-            Instantiate(memberType.projectile, transform.position, Quaternion.Euler(transform.forward));
+            Instantiate(memberType.projectile, transform.position, transform.rotation);
+            timeBetweenShots = memberType.fireRate; // Reset fire rate so you don't spam shots
         }
     }
 }
