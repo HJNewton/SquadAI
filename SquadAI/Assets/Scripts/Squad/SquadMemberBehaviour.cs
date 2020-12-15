@@ -97,11 +97,13 @@ public class SquadMemberBehaviour : MonoBehaviour
         if(targetedEnemy)
         {
             squadCombat.attackState = SquadMemberCombat.AttackState.Attacking;
+            navMeshAgent.isStopped = true;
         }
 
         if(targetedEnemy == null)
         {
             squadCombat.attackState = SquadMemberCombat.AttackState.Idle;
+            navMeshAgent.isStopped = false;
         }
     }
 
