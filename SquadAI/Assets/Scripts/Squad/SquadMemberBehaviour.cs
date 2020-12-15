@@ -87,8 +87,6 @@ public class SquadMemberBehaviour : MonoBehaviour
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, rotationSpeed, 0.0f); // Generates a new direction to face 
         
         transform.rotation = Quaternion.LookRotation(newDirection); // Applies new rotation
-
-        Debug.DrawRay(transform.position, newDirection * 100);
     }
 
     // Functionality for setting the attack state
@@ -96,8 +94,24 @@ public class SquadMemberBehaviour : MonoBehaviour
     {
         if(targetedEnemy)
         {
-            squadCombat.attackState = SquadMemberCombat.AttackState.Attacking;
-            navMeshAgent.isStopped = true;
+            // IMPROVE THIS
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity)) // Cast out a ray to ensure the enemy can be hit, if it can't then the member will move to a spot where they can
+            {
+                Debug.DrawRay(transform.position, transform.forward * 100);
+
+                if (hit.transform.gameObject.CompareTag("Enemy"))
+                {
+                    squadCombat.attackState = SquadMemberCombat.AttackState.Attacking;
+                    navMeshAgent.isStopped = true;
+                }
+
+                if (!hit.transform.gameObject.CompareTag("Enemy"))
+                {
+                    squadCombat.attackState = SquadMemberCombat.AttackState.Idle;
+                    navMeshAgent.isStopped = false;
+                }
+            }
         }
 
         if(targetedEnemy == null)
