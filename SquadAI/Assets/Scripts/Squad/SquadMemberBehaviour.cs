@@ -94,24 +94,25 @@ public class SquadMemberBehaviour : MonoBehaviour
     {
         if(targetedEnemy)
         {
+            squadCombat.attackState = SquadMemberCombat.AttackState.Attacking;
+
             // IMPROVE THIS
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity)) // Cast out a ray to ensure the enemy can be hit, if it can't then the member will move to a spot where they can
-            {
-                Debug.DrawRay(transform.position, transform.forward * 100);
+            //RaycastHit hit;
+            //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity)) // Cast out a ray to ensure the enemy can be hit, if it can't then the member will move to a spot where they can
+            //{
+            //    Debug.DrawRay(transform.position, transform.forward * 100);
 
-                if (hit.transform.gameObject.CompareTag("Enemy"))
-                {
-                    squadCombat.attackState = SquadMemberCombat.AttackState.Attacking;
-                    navMeshAgent.isStopped = true;
-                }
+            //    if (hit.transform.gameObject.CompareTag("Enemy"))
+            //    {
+            //        //navMeshAgent.isStopped = true;
+            //    }
 
-                if (!hit.transform.gameObject.CompareTag("Enemy"))
-                {
-                    squadCombat.attackState = SquadMemberCombat.AttackState.Idle;
-                    navMeshAgent.isStopped = false;
-                }
-            }
+            //    if (!hit.transform.gameObject.CompareTag("Enemy"))
+            //    {
+            //        squadCombat.attackState = SquadMemberCombat.AttackState.Idle;
+            //        //navMeshAgent.isStopped = false;
+            //    }
+            //}
         }
 
         if(targetedEnemy == null)

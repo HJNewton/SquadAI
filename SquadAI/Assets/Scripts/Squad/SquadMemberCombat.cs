@@ -16,6 +16,8 @@ public class SquadMemberCombat : MonoBehaviour
 
     [Header("Combat Setup")]
     public SquadMemberType memberType; // The squad member type scriptable object
+    public Transform firePosition;
+    public Transform target;
 
     float timeBetweenShots;
 
@@ -27,7 +29,7 @@ public class SquadMemberCombat : MonoBehaviour
     private void Update()
     {
         Attack();
-
+        
         timeBetweenShots -= Time.deltaTime; // Reduce time until next available shot
     }
 
@@ -36,7 +38,10 @@ public class SquadMemberCombat : MonoBehaviour
         // Is attacking
         if(attackState == AttackState.Attacking && timeBetweenShots <= 0)
         {
-            Instantiate(memberType.projectile, transform.position, transform.rotation);
+            target = GetComponent<SquadMemberBehaviour>().targetedEnemy;
+            Vector3 fireDirection = target.position - firePosition.position;
+
+            Instantiate(memberType.projectile, firePosition.position, Quaternion.Euler(fireDirection));
             timeBetweenShots = memberType.fireRate; // Reset fire rate so you don't spam shots
         }
     }
