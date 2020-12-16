@@ -251,6 +251,8 @@ MonoBehaviour:
   attackState: 0
   memberType: {fileID: 11400000, guid: 71f6a18afbc2db84aafb3b00af31d819, type: 2}
   firePosition: {fileID: 7109360290451774948}
+  target: {fileID: 0}
+  fireDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &156842020897329291
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +374,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6020744085828445869}
-  m_LocalRotation: {x: -0.70710707, y: -0, z: -0, w: 0.70710653}
+  m_LocalRotation: {x: -0.00000086426724, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.85, y: 1.15, z: -0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
