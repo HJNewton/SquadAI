@@ -23,18 +23,37 @@ public class SquadMemberHealth : MonoBehaviour
         squadMemberBehaviour = this.GetComponent<SquadMemberBehaviour>(); // Get the combat script attached to this agent
     }
 
+    private void Start()
+    {
+        if(healParticles.isPlaying)
+        {
+            healParticles.Stop();
+        }
+    }
+
     private void Update()
     {
         if (squadMemberCombat.attackState == SquadMemberCombat.AttackState.Idle &&
             !squadMemberBehaviour.navMeshAgent.pathPending &&
             squadMemberBehaviour.navMeshAgent.remainingDistance < squadMemberBehaviour.navMeshAgent.stoppingDistance &&
-            (!squadMemberBehaviour.navMeshAgent.hasPath || squadMemberBehaviour.navMeshAgent.velocity.sqrMagnitude == 0f))
+            (!squadMemberBehaviour.navMeshAgent.hasPath || squadMemberBehaviour.navMeshAgent.velocity.sqrMagnitude == 0f)) // Basically this absolute monstrosity tests if the member is both in the idle state and the navmesh agent is stopped
         {
             timeIdle += Time.deltaTime;
 
             if (timeIdle > idleTimeToHeal) // If squad has been idle for the appropriate amount of time to start healing
             {
-                Healing(); // Heal 
+                if (currentHealth <= memberType.health)
+                {
+                    Healing(); // Heal 
+                }
+
+                if (currentHealth >= memberType.health)
+                {
+                    if (healParticles.isPlaying)
+                    {
+                        healParticles.Stop();
+                    }
+                }
             }
         }
 
@@ -42,8 +61,15 @@ public class SquadMemberHealth : MonoBehaviour
         {
             timeIdle = 0;
 
-            var hp = healParticles.emission;
-            hp.enabled = false; // Set healing particles to inactive
+            if (healParticles.isPlaying || !healParticles.isPlaying)
+            {
+                healParticles.Stop();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            TakeDamage(5f);
         }
     }
 
@@ -51,8 +77,10 @@ public class SquadMemberHealth : MonoBehaviour
     {
         currentHealth += Time.deltaTime * memberType.healingPerSecond; // Heals the squad member every frame for a certain amount determined by the squad member type
 
-        var hp = healParticles.emission;
-        hp.enabled = true; // Set healing particles to active
+        if (!healParticles.isPlaying)
+        {
+            healParticles.Play();
+        }
     }
 
     void TakeDamage(float damageToTake)
