@@ -5,6 +5,15 @@ using UnityEngine.AI;
 
 public class SquadManager : MonoBehaviour
 {
+    public enum Formation
+    {
+        Grid,
+        Line,
+    }
+
+    [Header("Current Formation")]
+    public Formation formation; // Current state 
+
     [Header("Squad Spawning")]
     public GameObject memberPrefab;
     public int numberOfMembers;
@@ -15,6 +24,11 @@ public class SquadManager : MonoBehaviour
     [Header("Movement Setup")]
     public Camera mainCam;
     public NavMeshAgent navMeshAgent;
+
+    private void Awake()
+    {
+        formation = Formation.Grid;
+    }
 
     private void Start()
     {
