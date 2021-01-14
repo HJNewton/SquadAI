@@ -126,4 +126,9 @@ public class SquadMemberBehaviour : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, memberType.attackRange);
     }
+
+    private void OnDestroy()
+    {
+        squadManager.allSquadMembers.Remove(this.gameObject);
+    }
 }
