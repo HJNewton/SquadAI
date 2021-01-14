@@ -8,7 +8,6 @@ public class SquadMemberCombat : MonoBehaviour
     {
         Idle,
         Attacking,
-        Healing,
     }
 
     [Header("Current State")]

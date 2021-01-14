@@ -19,5 +19,5 @@ MonoBehaviour:
   damage: 5
   attackRange: 5
   fireRate: 0.75
-  healingPerSecond: 0
+  healingPerSecond: 5
   projectile: {fileID: 5181833357449358661, guid: 9c3115ff241f41541b4d35267959b7ab, type: 3}
