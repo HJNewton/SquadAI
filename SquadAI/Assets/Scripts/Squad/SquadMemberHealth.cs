@@ -83,7 +83,7 @@ public class SquadMemberHealth : MonoBehaviour
         }
     }
 
-    void TakeDamage(float damageToTake)
+    public void TakeDamage(float damageToTake)
     {
         currentHealth -= damageToTake; // Take damage from an enemy
     }

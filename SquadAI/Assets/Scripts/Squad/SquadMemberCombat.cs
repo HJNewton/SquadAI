@@ -17,7 +17,7 @@ public class SquadMemberCombat : MonoBehaviour
     public SquadMemberType memberType; // The squad member type scriptable object
     public Transform firePosition;
     public Transform target;
-    [SerializeField]Vector3 fireDirection;
+    [SerializeField] Vector3 fireDirection;
 
     float timeBetweenShots;
 
