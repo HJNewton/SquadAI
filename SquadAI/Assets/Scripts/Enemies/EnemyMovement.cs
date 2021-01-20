@@ -5,9 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Header("New Destination Generation Setup")]
-    public float destinationGenerationRadius;
-
     [SerializeField]Vector3 targetDestination;
 
     NavMeshAgent navMeshAgent;
@@ -34,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    Vector3 GenerateNewDestination(float generationRadius)
+    Vector3 GenerateNewDestination()
     {
         if (!navMeshAgent.hasPath)
         {
@@ -55,6 +52,6 @@ public class EnemyMovement : MonoBehaviour
 
     void SetDestination()
     {
-        navMeshAgent.SetDestination(GenerateNewDestination(destinationGenerationRadius)); // Sets new agent destination
+        navMeshAgent.SetDestination(GenerateNewDestination()); // Sets new agent destination
     }
 }

@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   destroyTime: 3
+  hitParticles: {fileID: 2849907758945602854, guid: 6b580802bbad4df4284d2e791dea46e2, type: 3}
   memberType: {fileID: 11400000, guid: 71f6a18afbc2db84aafb3b00af31d819, type: 2}
 --- !u!1001 &8638035369964349793
 PrefabInstance:

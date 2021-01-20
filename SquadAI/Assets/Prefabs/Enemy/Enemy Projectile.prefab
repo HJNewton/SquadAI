@@ -129,6 +129,7 @@ MonoBehaviour:
   speed: 500
   destroyTime: 3
   damage: 2
+  hitParticles: {fileID: 5508039328855288688, guid: 1033cebbb151ceb4993e693e281e3ea7, type: 3}
 --- !u!1001 &1345244660590232127
 PrefabInstance:
   m_ObjectHideFlags: 0

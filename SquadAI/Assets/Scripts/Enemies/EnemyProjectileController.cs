@@ -8,6 +8,7 @@ public class EnemyProjectileController : MonoBehaviour
     public float speed;
     public float destroyTime;
     public float damage;
+    public GameObject hitParticles;
 
     Rigidbody rb;
 
@@ -33,6 +34,7 @@ public class EnemyProjectileController : MonoBehaviour
         if (collision.gameObject.CompareTag("Squad Member"))
         {
             collision.gameObject.GetComponent<SquadMemberHealth>().TakeDamage(damage);
+            Instantiate(hitParticles, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 
