@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 429618868}
   m_Layer: 0
   m_Name: Ground 3
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -1176,7 +1176,9 @@ MonoBehaviour:
   moveSpeed: 15
   zoomSpeed: 25
   cameraSensitivity: 165
-  minZoomDistance: 8
+  rotationX: 0
+  rotationY: 0
+  minZoomDistance: 6
   maxZoomDistance: 15
   focusTarget: {fileID: 439878263}
   focusSpeed: 10
@@ -2335,7 +2337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5036009013046844664, guid: 6f63d8a8d08948d44b93aa918c4899be, type: 3}
       propertyPath: m_Name
-      value: Enemy (3)
+      value: Enemy (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f63d8a8d08948d44b93aa918c4899be, type: 3}
@@ -2629,7 +2631,7 @@ GameObject:
   - component: {fileID: 1189585568}
   m_Layer: 0
   m_Name: Ground 1
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -3688,7 +3690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5036009013046844664, guid: 6f63d8a8d08948d44b93aa918c4899be, type: 3}
       propertyPath: m_Name
-      value: Enemy (4)
+      value: Enemy (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f63d8a8d08948d44b93aa918c4899be, type: 3}
@@ -4460,7 +4462,7 @@ GameObject:
   - component: {fileID: 2117146272}
   m_Layer: 0
   m_Name: Ground 2
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -4623,6 +4625,10 @@ PrefabInstance:
     - target: {fileID: 5036009013046844664, guid: 6f63d8a8d08948d44b93aa918c4899be, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445227525436384069, guid: 6f63d8a8d08948d44b93aa918c4899be, type: 3}
+      propertyPath: destinationGenerationRadius
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f63d8a8d08948d44b93aa918c4899be, type: 3}

@@ -10,8 +10,8 @@ public class CameraController : MonoBehaviour
 
     [Header("Rotation Setup")]
     public float cameraSensitivity = 90f;
-    private float rotationX = 0.0f;
-    private float rotationY = 0.0f;
+    [SerializeField]private float rotationX = 0.0f;
+    [SerializeField]private float rotationY = 0.0f;
 
     [Header("Zoom Setup")]
     public float minZoomDistance;

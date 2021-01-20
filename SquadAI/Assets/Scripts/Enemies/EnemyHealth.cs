@@ -1,15 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Enemy Health Setup")]
-    public float health;
+    public float maxHealth;
+    public float currentHealth;
+
+    [Header("Enemy Health Bar Setup")]
+    public Image healthBar;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
 
     private void Update()
     {
-        if (health <= 0)
+        healthBar.fillAmount = currentHealth / maxHealth;
+
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
@@ -17,6 +29,6 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damageToTake)
     {
-        health -= damageToTake;
+        currentHealth -= damageToTake;
     }
 }

@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SquadMemberHealth : MonoBehaviour
 {
     [Header("Squad Member Health Setup")]
     public SquadMemberType memberType;
     public ParticleSystem healParticles;
-    public float idleTimeToHeal;
+    public Image healthBar;
     public float currentHealth;
+    public float idleTimeToHeal;
 
     [SerializeField] private float timeIdle;
 
@@ -33,6 +35,8 @@ public class SquadMemberHealth : MonoBehaviour
 
     private void Update()
     {
+        healthBar.fillAmount = currentHealth / memberType.health;
+
         if (squadMemberCombat.attackState == SquadMemberCombat.AttackState.Idle &&
             !squadMemberBehaviour.navMeshAgent.pathPending &&
             squadMemberBehaviour.navMeshAgent.remainingDistance < squadMemberBehaviour.navMeshAgent.stoppingDistance &&
