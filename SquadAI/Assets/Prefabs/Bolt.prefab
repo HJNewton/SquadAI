@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 750
   damage: 20
-  damageRange: 1
+  damageRange: 2
   destroyTime: 3
   hitParticles: {fileID: 5664572186808050322, guid: e71d7bd26285ad744a0a72f9c6f007cf, type: 3}
 --- !u!1001 &7791370290932469623
