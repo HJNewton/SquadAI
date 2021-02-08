@@ -9,7 +9,7 @@ public class FireballController : MonoBehaviour
     public float damage;
     public float damageRange;
     public float destroyTime;
-    //public GameObject hitParticles;
+    public GameObject hitParticles;
 
     Rigidbody rb;
 
@@ -39,21 +39,14 @@ public class FireballController : MonoBehaviour
             if (hitCollider.gameObject.CompareTag("Enemy"))
             {
                 hitCollider.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
-
-                hitCollider.gameObject.GetComponent<EnemyHealth>().takingDOTS = true;
             }
         }
 
         Destroy(gameObject);
-
-        if (collision.gameObject.CompareTag("Environment"))
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnDestroy()
     {
-        //Instantiate(hitParticles, transform.position, transform.rotation);
+        Instantiate(hitParticles, transform.position, transform.rotation);
     }
 }

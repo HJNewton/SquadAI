@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e4f4d8b438d2844be9a41b3c5f77f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceCutOff: 10
+  distanceCutOff: 15
   distanceFromCam: 0
   children:
   - {fileID: 6347347723162610680}

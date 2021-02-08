@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4341872402490662232
 Transform:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   target: {fileID: 0}
   turretRange: 5
   rotationSpeed: 10
-  fireRate: 1
+  fireRate: 0.5
 --- !u!1 &2528354125696832583
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5774930914851871411, guid: 94868102e3f87be418f4a12cfc01ded6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.027
+      value: -0.145
       objectReference: {fileID: 0}
     - target: {fileID: 5774930914851871411, guid: 94868102e3f87be418f4a12cfc01ded6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -191,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5774930914851871411, guid: 94868102e3f87be418f4a12cfc01ded6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.103
+      value: 0.307
       objectReference: {fileID: 0}
     - target: {fileID: 5774930914851871411, guid: 94868102e3f87be418f4a12cfc01ded6, type: 3}
       propertyPath: m_LocalRotation.x
