@@ -11,6 +11,7 @@ TagManager:
   - Projectile
   - Environment
   - Enemy Projectile
+  - Portal
   layers:
   - Default
   - TransparentFX

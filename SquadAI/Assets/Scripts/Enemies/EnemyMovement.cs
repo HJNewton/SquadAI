@@ -14,12 +14,12 @@ public class EnemyMovement : MonoBehaviour
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         enemyCombat = this.GetComponent<EnemyCombat>();
+
+        SetDestination();
     }
 
     private void Update()
     {
-        SetDestination();
-
         if(enemyCombat.attackState == EnemyCombat.AttackState.Attacking)
         {
             navMeshAgent.isStopped = true;
@@ -33,19 +33,21 @@ public class EnemyMovement : MonoBehaviour
 
     Vector3 GenerateNewDestination()
     {
-        if (!navMeshAgent.hasPath)
-        {
-            NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
+        //if (!navMeshAgent.hasPath)
+        //{
+        //    NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
 
-            // Pick the first indice of a random triangle in the nav mesh
-            int indice = Random.Range(0, navMeshData.indices.Length - 3);
+        //    // Pick the first indice of a random triangle in the nav mesh
+        //    int indice = Random.Range(0, navMeshData.indices.Length - 3);
 
-            // Select a random point on it
-            Vector3 point = Vector3.Lerp(navMeshData.vertices[navMeshData.indices[indice]], navMeshData.vertices[navMeshData.indices[indice + 1]], Random.value);
-            Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[indice + 2]], Random.value);
+        //    // Select a random point on it
+        //    Vector3 point = Vector3.Lerp(navMeshData.vertices[navMeshData.indices[indice]], navMeshData.vertices[navMeshData.indices[indice + 1]], Random.value);
+        //    Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[indice + 2]], Random.value);
 
-            targetDestination = point;
-        }
+        //    targetDestination = point;
+        //}
+
+        targetDestination = GameObject.FindGameObjectWithTag("Portal").transform.position;
 
         return targetDestination;
     }
