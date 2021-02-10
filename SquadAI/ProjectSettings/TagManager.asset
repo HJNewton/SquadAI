@@ -12,6 +12,7 @@ TagManager:
   - Environment
   - Enemy Projectile
   - Portal
+  - Game Manager
   layers:
   - Default
   - TransparentFX
