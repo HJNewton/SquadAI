@@ -9,9 +9,13 @@ public class TurretPoint : MonoBehaviour
     [Header("Turret Point Setup")]
     public Canvas buyCanvas;
     public GameObject ballista;
+    public int ballistaCost;
     public GameObject fireTurret;
+    public int fireTurretCost;
 
     private bool purchasedTurret;
+
+    GameManagerScript gameManager;
 
     private void Awake()
     {
@@ -19,24 +23,36 @@ public class TurretPoint : MonoBehaviour
 
         ballista.SetActive(false);
         fireTurret.SetActive(false);
+
+        gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
     }
 
     public void BuyBallista()
     {
-        ballista.SetActive(true);
+        if (gameManager.coinsTotal >= ballistaCost)
+        {
+            gameManager.coinsTotal -= ballistaCost;
 
-        purchasedTurret = true;
-        
-        buyCanvas.enabled = false;
+            ballista.SetActive(true);
+
+            purchasedTurret = true;
+
+            buyCanvas.enabled = false;
+        }
     }
 
     public void BuyFireTurret()
     {
-        fireTurret.SetActive(true);
+        if (gameManager.coinsTotal >= fireTurretCost)
+        {
+            gameManager.coinsTotal -= fireTurretCost;
 
-        purchasedTurret = true;
+            fireTurret.SetActive(true);
 
-        buyCanvas.enabled = false;
+            purchasedTurret = true;
+
+            buyCanvas.enabled = false;
+        }
     }
 
     private void OnMouseOver()

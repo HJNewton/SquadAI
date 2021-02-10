@@ -397,7 +397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buyCanvas: {fileID: 138368014468224591}
   ballista: {fileID: 138368012968515818}
+  ballistaCost: 100
   fireTurret: {fileID: 6691141345349882504}
+  fireTurretCost: 150
 --- !u!1 &5487590808657189755
 GameObject:
   m_ObjectHideFlags: 0
