@@ -31,16 +31,24 @@ public class ProjectileController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        //if (collision.gameObject.CompareTag("Enemy"))
+        //{
+        //    collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(memberType.damage); // Deals damage to hit enemies
+        //    Instantiate(hitParticles, transform.position, transform.rotation);
+        //    Destroy(gameObject);
+        //}
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, memberType.damageRange); // Get all colliders in a certain radius
+
+        foreach (var hitCollider in hitColliders)
         {
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(memberType.damage); // Deals damage to hit enemies
-            Instantiate(hitParticles, transform.position, transform.rotation);
-            Destroy(gameObject);
+            if (hitCollider.gameObject.CompareTag("Enemy"))
+            {
+                hitCollider.gameObject.GetComponent<EnemyHealth>().TakeDamage(memberType.damage);
+                Instantiate(hitParticles, transform.position, transform.rotation);
+            }
         }
 
-        if (collision.gameObject.CompareTag("Environment"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

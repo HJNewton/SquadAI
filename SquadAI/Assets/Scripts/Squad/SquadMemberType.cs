@@ -13,6 +13,7 @@ public class SquadMemberType : ScriptableObject
     [Header("Stats")]
     public float health;
     public float damage;
+    public float damageRange;
     public float attackRange;
     public float fireRate;
     public float healingPerSecond;

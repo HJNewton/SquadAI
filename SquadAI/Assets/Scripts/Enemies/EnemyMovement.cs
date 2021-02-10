@@ -10,11 +10,13 @@ public class EnemyMovement : MonoBehaviour
     NavMeshAgent navMeshAgent;
     EnemyCombat enemyCombat;
 
+    float speed;
+
     private void Awake()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         enemyCombat = this.GetComponent<EnemyCombat>();
-
+        speed = navMeshAgent.speed;
         SetDestination();
     }
 
@@ -22,11 +24,13 @@ public class EnemyMovement : MonoBehaviour
     {
         if(enemyCombat.attackState == EnemyCombat.AttackState.Attacking)
         {
-            navMeshAgent.isStopped = true;
+            //navMeshAgent.isStopped = true;
+            navMeshAgent.speed = speed / 2;
         }
 
         else
         {
+            navMeshAgent.speed = speed;
             navMeshAgent.isStopped = false;
         }
     }
