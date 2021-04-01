@@ -95,14 +95,14 @@ public class EnemyWaveSpawner : MonoBehaviour
         return true;
     }
 
-    IEnumerator SpawnWave(Wave _wave)
+    IEnumerator SpawnWave(Wave wave)
     {
         state = SpawnState.SPAWNING; // Is spawning
 
-        for (int i = 0; i < _wave.enemyCount; i++) // Loop through number of enemies
+        for (int i = 0; i < wave.enemyCount; i++) // Loop through number of enemies
         {
-            SpawnEnemy(_wave.enemy);
-            yield return new WaitForSeconds(_wave.spawnRate);
+            SpawnEnemy(wave.enemy);
+            yield return new WaitForSeconds(wave.spawnRate);
         }
 
         state = SpawnState.WAITING; // Waiting for all enemies to die
@@ -110,10 +110,10 @@ public class EnemyWaveSpawner : MonoBehaviour
         yield break;
     }
 
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy(Transform enemy)
     {
         Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Instantiate(_enemy, _sp.position, _sp.rotation);
+        Instantiate(enemy, _sp.position, _sp.rotation);
     }
 }

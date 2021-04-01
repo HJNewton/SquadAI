@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     [Header("Enemy Health Setup")]
     public float maxHealth;
     public float currentHealth;
+    public GameObject coinPrefab;
 
     [Header("Enemy Health Bar Setup")]
     public Image healthBar;
@@ -23,6 +24,8 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Instantiate(coinPrefab, transform.position, transform.rotation);
+
             Destroy(gameObject);
         }
     }

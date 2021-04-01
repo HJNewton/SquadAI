@@ -106,6 +106,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6927108875985464445}
     m_Modifications:
+    - target: {fileID: 943052085028423574, guid: 36d5622eb90fc6f45be82337345e8838, type: 3}
+      propertyPath: LightsModule.ratio
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7130186690231110185, guid: 36d5622eb90fc6f45be82337345e8838, type: 3}
       propertyPath: m_Name
       value: Coins Particles
@@ -316,7 +320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3815347802347874970, guid: 4edde82e777df904991767a542ab2e41, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4edde82e777df904991767a542ab2e41, type: 3}
