@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class PortalScript : MonoBehaviour
@@ -17,7 +17,7 @@ public class PortalScript : MonoBehaviour
 
         if (amountThrough >= amountAllowedThrough)
         {
-            SceneManager.LoadScene("End Game Scene");
+            GameManagerScript.instance.gameState = GameManagerScript.GameState.GameLost;
         }
     }
 

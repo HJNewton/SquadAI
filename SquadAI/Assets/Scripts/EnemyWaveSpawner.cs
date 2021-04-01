@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class EnemyWaveSpawner : MonoBehaviour
 {
-    public enum SpawnState { SPAWNING, WAITING, COUNTING };
+    public enum SpawnState 
+    { 
+        SPAWNING, 
+        WAITING, 
+        COUNTING 
+    };
 
     [System.Serializable]
     public class Wave
@@ -69,8 +74,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
         if (nextWave + 1 > waves.Length - 1) // If next wave is bigger than number of waves we have
         {
-            Debug.Log("ALL WAVES COMPLETE");
-            //ALLOW PLAYER TO MOVE ON
+            GameManagerScript.instance.gameState = GameManagerScript.GameState.GameWon;
         }
         else
         {
