@@ -58,7 +58,6 @@ public class EnemyWaveSpawner : MonoBehaviour
             {
                 StartCoroutine(SpawnWave(waves[nextWave])); // Start spawning wave
             }
-
         }
 
         else // If wave is not ready to spawn
@@ -76,6 +75,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             GameManagerScript.instance.gameState = GameManagerScript.GameState.GameWon;
         }
+
         else
         {
             nextWave++;
@@ -116,8 +116,8 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     void SpawnEnemy(Transform enemy)
     {
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Transform sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Instantiate(enemy, _sp.position, _sp.rotation);
+        Instantiate(enemy, sp.position, sp.rotation);
     }
 }
