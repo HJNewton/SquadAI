@@ -57,7 +57,7 @@ public class TurretPoint : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (!purchasedTurret)
+        if (!purchasedTurret && EnemyWaveSpawner.instance.state == EnemyWaveSpawner.SpawnState.BetweenWaves)
         {
             buyCanvas.enabled = true;
         }

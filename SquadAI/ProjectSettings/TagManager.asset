@@ -13,6 +13,7 @@ TagManager:
   - Enemy Projectile
   - Portal
   - Game Manager
+  - Coin
   layers:
   - Default
   - TransparentFX

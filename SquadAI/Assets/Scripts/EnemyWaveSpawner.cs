@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyWaveSpawner : MonoBehaviour
 {
+    public static EnemyWaveSpawner instance = null;
+
     public enum SpawnState 
     { 
-        SPAWNING, 
-        WAITING, 
-        COUNTING 
+        Spawning, 
+        Waiting, 
+        BetweenWaves, 
     };
 
     [System.Serializable]
@@ -23,23 +25,29 @@ public class EnemyWaveSpawner : MonoBehaviour
     [Header("Settings")]
     public Wave[] waves; // Array of Wave classes
     public Transform[] spawnPoints; // Array of spawn points
+    public GameObject nextWaveButton;
+
     private int nextWave = 0;
-
-    public float timeBetweenWaves = 5f; // Time between each wave
-    public float waveCountdown; // TIme until next wave begins
-
     private float searchCountdown = 1f;
 
-    private SpawnState state = SpawnState.COUNTING;
+    public SpawnState state = SpawnState.BetweenWaves;
 
     private void Start()
     {
-        waveCountdown = timeBetweenWaves;
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        else if (instance != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
     {
-        if (state == SpawnState.WAITING)
+        if (state == SpawnState.Waiting)
         {
             if (!EnemyIsAlive()) // If all enemies are dead
             {
@@ -51,25 +59,19 @@ public class EnemyWaveSpawner : MonoBehaviour
                 return;
             }
         }
+    }
 
-        if (waveCountdown <= 0) // If wave is ready to spawn
-        {
-            if (state != SpawnState.SPAWNING) // Not currently spawning enemies
-            {
-                StartCoroutine(SpawnWave(waves[nextWave])); // Start spawning wave
-            }
-        }
-
-        else // If wave is not ready to spawn
-        {
-            waveCountdown -= Time.deltaTime; // Reduces value of wave countdown 
-        }
+    public void StartNextWave()
+    {
+        StartCoroutine(SpawnWave(waves[nextWave])); // Start spawning wave
+        nextWaveButton.SetActive(false);
     }
 
     void WaveCompleted() // What occurs when wave is completed
     {
-        state = SpawnState.COUNTING;
-        waveCountdown = timeBetweenWaves;
+        state = SpawnState.BetweenWaves;
+
+        nextWaveButton.SetActive(true);
 
         if (nextWave + 1 > waves.Length - 1) // If next wave is bigger than number of waves we have
         {
@@ -101,7 +103,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave(Wave wave)
     {
-        state = SpawnState.SPAWNING; // Is spawning
+        state = SpawnState.Spawning; // Is spawning
 
         for (int i = 0; i < wave.enemyCount; i++) // Loop through number of enemies
         {
@@ -109,7 +111,7 @@ public class EnemyWaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(wave.spawnRate);
         }
 
-        state = SpawnState.WAITING; // Waiting for all enemies to die
+        state = SpawnState.Waiting; // Waiting for all enemies to die
 
         yield break;
     }
