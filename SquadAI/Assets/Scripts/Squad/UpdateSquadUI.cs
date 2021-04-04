@@ -8,6 +8,7 @@ public class UpdateSquadUI : MonoBehaviour
     [Header("UI Setup")]
     public Image gridHighlight;
     public Image lineHighlight;
+    public Image vShapeHighlight;
 
     SquadManager squadManager;
 
@@ -29,6 +30,8 @@ public class UpdateSquadUI : MonoBehaviour
             gridHighlight.enabled = true;
 
             lineHighlight.enabled = false;
+
+            vShapeHighlight.enabled = false;
         }
 
         // Line formation
@@ -37,6 +40,18 @@ public class UpdateSquadUI : MonoBehaviour
             lineHighlight.enabled = true;
 
             gridHighlight.enabled = false;
+
+            vShapeHighlight.enabled = false;
+        }
+
+        // V Shape formation
+        if (squadManager.formation == SquadManager.Formation.VShape)
+        {
+            lineHighlight.enabled = false;
+
+            gridHighlight.enabled = false;
+
+            vShapeHighlight.enabled = true;
         }
     }
 }

@@ -7,6 +7,7 @@ public class DestinationPositions : MonoBehaviour
     [Header("Position Vectors")]
     public Vector3 gridPosition;
     public Vector3 linePosisition;
+    public Vector3 vShapePosition;
 
     SquadManager squadManager;
 
@@ -40,6 +41,13 @@ public class DestinationPositions : MonoBehaviour
         {
             transform.localPosition = linePosisition;
             squadManager.formation = SquadManager.Formation.Line;
+        }
+
+        // Position in the v shape formation
+        if (Input.GetKeyDown(KeyCode.Alpha3) || squadManager.formation == SquadManager.Formation.VShape)
+        {
+            transform.localPosition = vShapePosition;
+            squadManager.formation = SquadManager.Formation.VShape;
         }
     }
 }

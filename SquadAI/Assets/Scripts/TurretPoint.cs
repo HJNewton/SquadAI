@@ -12,7 +12,10 @@ public class TurretPoint : MonoBehaviour
     public int ballistaCost;
     public GameObject fireTurret;
     public int fireTurretCost;
+    public float buildRadius;
 
+    [SerializeField] private bool squadInRange = false;
+    private SquadManager squadManager;
     private bool purchasedTurret;
 
     GameManagerScript gameManager;
@@ -25,6 +28,20 @@ public class TurretPoint : MonoBehaviour
         fireTurret.SetActive(false);
 
         gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>();
+        squadManager = GameObject.FindGameObjectWithTag("Squad Manager").GetComponent<SquadManager>();
+    }
+
+    private void Update()
+    {
+        if (Vector3.Distance(transform.position, squadManager.transform.position) < buildRadius)
+        {
+            squadInRange = true;
+        }
+
+        else 
+        {
+            squadInRange = false;
+        }
     }
 
     public void BuyBallista()
@@ -57,7 +74,8 @@ public class TurretPoint : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (!purchasedTurret && EnemyWaveSpawner.instance.state == EnemyWaveSpawner.SpawnState.BetweenWaves)
+        if (!purchasedTurret && EnemyWaveSpawner.instance.state == EnemyWaveSpawner.SpawnState.BetweenWaves &&
+            squadInRange)
         {
             buyCanvas.enabled = true;
         }

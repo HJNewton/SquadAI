@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyWaveSpawner : MonoBehaviour
 {
@@ -27,7 +28,9 @@ public class EnemyWaveSpawner : MonoBehaviour
     public Transform[] spawnPoints; // Array of spawn points
     public GameObject nextWaveButton;
     public int nextWave = 0;
+    public TextMeshProUGUI wavesText;
 
+    private int currentWave;
     private float searchCountdown = 1f;
 
     public SpawnState state = SpawnState.BetweenWaves;
@@ -59,11 +62,14 @@ public class EnemyWaveSpawner : MonoBehaviour
                 return;
             }
         }
+
+        wavesText.text = "Wave: " + currentWave.ToString() + "/" + waves.Length.ToString();
     }
 
     public void StartNextWave()
     {
         StartCoroutine(SpawnWave(waves[nextWave])); // Start spawning wave
+        currentWave++;
         nextWaveButton.SetActive(false);
     }
 

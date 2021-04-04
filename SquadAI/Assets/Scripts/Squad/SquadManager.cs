@@ -9,6 +9,7 @@ public class SquadManager : MonoBehaviour
     {
         Grid,
         Line,
+        VShape,
     }
 
     [Header("Current Formation")]
@@ -82,12 +83,12 @@ public class SquadManager : MonoBehaviour
             {
                 MoveToLocation(hit);
             }
-
-            for (int i = 0; i < numberOfMembers; i++)
-            {
-                allSquadMembers[i].GetComponent<SquadMemberBehaviour>().squadTargetPoint = destinationPoints[i].gameObject.transform;
-            }
         }
+
+        //for (int i = 0; i < numberOfMembers; i++)
+        //{
+        //    allSquadMembers[i].GetComponent<SquadMemberBehaviour>().squadTargetPoint = destinationPoints[i].gameObject.transform;
+        //}
     }
 
     // Functionality for moving to the new location based on hit location
