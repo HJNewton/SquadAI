@@ -7,6 +7,12 @@ public class Coin : MonoBehaviour
     public int coinsToGive = 10;
     public Transform coin;
     public float rotationSpeed;
+    public GameObject squadMemberCollecting;
+
+    private void Start()
+    {
+        GameObject.FindGameObjectWithTag("Squad Manager").GetComponent<SquadManager>().coinsInScene.Add(this.gameObject);
+    }
 
     private void Update()
     {
@@ -20,6 +26,20 @@ public class Coin : MonoBehaviour
             GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManagerScript>().coinsTotal += coinsToGive;
 
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (squadMemberCollecting != null)
+        {
+            squadMemberCollecting.GetComponent<SquadMemberBehaviour>().moveStates = SquadMemberBehaviour.MemberMovementStates.FollowingSquad;
+            squadMemberCollecting.GetComponent<SquadMemberBehaviour>().destinationTarget = squadMemberCollecting.GetComponent<SquadMemberBehaviour>().squadTargetPoint;
+        }
+
+        if (squadMemberCollecting == null)
+        {
+            GameObject.FindGameObjectWithTag("Squad Manager").GetComponent<SquadManager>().coinsInScene.Remove(this.gameObject);
         }
     }
 }

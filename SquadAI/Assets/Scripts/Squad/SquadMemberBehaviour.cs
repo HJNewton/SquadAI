@@ -5,10 +5,19 @@ using UnityEngine.AI;
 
 public class SquadMemberBehaviour : MonoBehaviour
 {
+    public enum MemberMovementStates
+    {
+        FollowingSquad,
+        CollectingCoins,
+    }
+
+    public MemberMovementStates moveStates = MemberMovementStates.FollowingSquad;
+
     [Header("Squad Member Movement Setup")]
     public Camera mainCam;
     public NavMeshAgent navMeshAgent;
     public Transform destinationTarget;
+    public Transform squadTargetPoint;
 
     [Header("Squad Member Combat Setup")]
     public SquadMemberType memberType;
@@ -24,6 +33,8 @@ public class SquadMemberBehaviour : MonoBehaviour
 
         squadCombat = this.GetComponent<SquadMemberCombat>();
         navMeshAgent = this.GetComponent<NavMeshAgent>();
+
+        squadTargetPoint = destinationTarget;
     }
 
     void Update()
@@ -40,9 +51,17 @@ public class SquadMemberBehaviour : MonoBehaviour
     }
 
     // Functionality for moving to target destination
-    void MoveToDestination()
+    public void MoveToDestination()
     {
-        navMeshAgent.SetDestination(destinationTarget.transform.position); // Set's new agent destination
+        if (moveStates == MemberMovementStates.FollowingSquad)
+        {
+            navMeshAgent.SetDestination(squadTargetPoint.transform.position); // Set's new agent destination
+        }
+
+        if (moveStates == MemberMovementStates.CollectingCoins)
+        {
+            navMeshAgent.SetDestination(destinationTarget.transform.position); // Set's new agent destination
+        }
     }
 
     // Functionality to detect enemies in a certain radius

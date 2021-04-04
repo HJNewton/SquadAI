@@ -26,8 +26,8 @@ public class EnemyWaveSpawner : MonoBehaviour
     public Wave[] waves; // Array of Wave classes
     public Transform[] spawnPoints; // Array of spawn points
     public GameObject nextWaveButton;
+    public int nextWave = 0;
 
-    private int nextWave = 0;
     private float searchCountdown = 1f;
 
     public SpawnState state = SpawnState.BetweenWaves;

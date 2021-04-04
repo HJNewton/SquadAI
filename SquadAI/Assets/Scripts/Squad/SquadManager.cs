@@ -25,6 +25,8 @@ public class SquadManager : MonoBehaviour
     public Camera mainCam;
     public NavMeshAgent navMeshAgent;
 
+    public List<GameObject> coinsInScene = new List<GameObject>();
+
     private void Awake()
     {
         formation = Formation.Grid;
@@ -49,6 +51,23 @@ public class SquadManager : MonoBehaviour
     private void Update()
     {
         GetNewLocation();
+
+        if (EnemyWaveSpawner.instance.state == EnemyWaveSpawner.SpawnState.BetweenWaves &&
+            coinsInScene.Count > 0)
+        {
+            foreach (GameObject squadMember in allSquadMembers)
+            {
+                if (squadMember.GetComponent<SquadMemberBehaviour>().moveStates == SquadMemberBehaviour.MemberMovementStates.FollowingSquad)
+                {
+                    coinsInScene[0].GetComponent<Coin>().squadMemberCollecting = squadMember;
+
+                    squadMember.GetComponent<SquadMemberBehaviour>().moveStates = SquadMemberBehaviour.MemberMovementStates.CollectingCoins;
+                    squadMember.GetComponent<SquadMemberBehaviour>().destinationTarget = coinsInScene[0].transform;
+
+                    coinsInScene.RemoveAt(coinsInScene.Count - coinsInScene.Count);
+                }
+            }
+        }
     }
 
     // Functionality for getting a new location to move to.
@@ -62,6 +81,11 @@ public class SquadManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit)) // Checks if that ray has hit something
             {
                 MoveToLocation(hit);
+            }
+
+            for (int i = 0; i < numberOfMembers; i++)
+            {
+                allSquadMembers[i].GetComponent<SquadMemberBehaviour>().squadTargetPoint = destinationPoints[i].gameObject.transform;
             }
         }
     }
