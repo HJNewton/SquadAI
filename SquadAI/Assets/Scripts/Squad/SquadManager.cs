@@ -69,6 +69,11 @@ public class SquadManager : MonoBehaviour
                 }
             }
         }
+
+        if (allSquadMembers.Count <= 0)
+        {
+            GameManagerScript.instance.gameState = GameManagerScript.GameState.GameLost;
+        }
     }
 
     // Functionality for getting a new location to move to.

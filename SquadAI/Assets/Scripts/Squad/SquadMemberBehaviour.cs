@@ -26,6 +26,8 @@ public class SquadMemberBehaviour : MonoBehaviour
     SquadManager squadManager;
     SquadMemberCombat squadCombat;
 
+    float speed;
+
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -34,6 +36,7 @@ public class SquadMemberBehaviour : MonoBehaviour
         squadCombat = this.GetComponent<SquadMemberCombat>();
         navMeshAgent = this.GetComponent<NavMeshAgent>();
 
+        speed = navMeshAgent.speed;
         squadTargetPoint = destinationTarget;
     }
 
@@ -43,6 +46,16 @@ public class SquadMemberBehaviour : MonoBehaviour
         MoveToDestination();
 
         SetAttackState();
+
+        if (squadCombat.attackState == SquadMemberCombat.AttackState.Attacking)
+        {
+            navMeshAgent.speed = speed / 2;
+        }
+
+        else
+        {
+            navMeshAgent.speed = speed;
+        }
 
         if (targetedEnemy)
         {

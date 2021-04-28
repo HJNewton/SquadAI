@@ -71,11 +71,6 @@ public class SquadMemberHealth : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            TakeDamage(5f);
-        }
-
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
